@@ -1,0 +1,114 @@
+import csv
+from PyQt6 import QtWidgets
+
+
+class Ui_VotingApp:
+    def __init__(self, vote_manager):
+        self.vote_manager = vote_manager
+        self.VotingApp = QtWidgets.QWidget()
+        self.setupUi(self.VotingApp)
+
+    def setupUi(self, VotingApp):
+        VotingApp.setWindowTitle("VotingApp")
+        VotingApp.setMinimumSize(360, 350)
+        VotingApp.setMaximumSize(360, 350)
+
+        main_layout = QtWidgets.QVBoxLayout(VotingApp)
+
+        # User ID Input
+        frame_id = QtWidgets.QHBoxLayout()
+        self.ID_Label = QtWidgets.QLabel("USER ID:")
+        self.ID_Box = QtWidgets.QLineEdit()
+        frame_id.addWidget(self.ID_Label)
+        frame_id.addWidget(self.ID_Box)
+        main_layout.addLayout(frame_id)
+
+        # Name Input
+        frame_name = QtWidgets.QHBoxLayout()
+        self.Name_Label = QtWidgets.QLabel("NAME:")
+        self.Name_Box = QtWidgets.QLineEdit()
+        frame_name.addWidget(self.Name_Label)
+        frame_name.addWidget(self.Name_Box)
+        main_layout.addLayout(frame_name)
+
+        # Candidate Selection
+        frame_candidates = QtWidgets.QHBoxLayout()
+        self.Bianca_radioButton = QtWidgets.QRadioButton("Bianca")
+        self.Felicia_radioButton = QtWidgets.QRadioButton("Felicia")
+        self.Edward_radioButton = QtWidgets.QRadioButton("Edward")
+
+        self.Candidate_Label = QtWidgets.QLabel("Candidate:")
+        frame_candidates.addWidget(self.Candidate_Label)
+        frame_candidates.addWidget(self.Bianca_radioButton)
+        frame_candidates.addWidget(self.Felicia_radioButton)
+        frame_candidates.addWidget(self.Edward_radioButton)
+        main_layout.addLayout(frame_candidates)
+
+        # Vote Button
+        self.Vote_Button = QtWidgets.QPushButton("VOTE")
+        main_layout.addWidget(self.Vote_Button)
+
+        # Exit Button
+        frame_exit = QtWidgets.QHBoxLayout()
+        self.Exit_Button = QtWidgets.QPushButton("EXIT")
+        frame_exit.addWidget(self.Exit_Button)
+        main_layout.addLayout(frame_exit)
+
+        self.Vote_Button.clicked.connect(self.vote_button_clicked)
+        self.Exit_Button.clicked.connect(self.exit_button_clicked)
+
+    def vote_button_clicked(self):
+        user_id = self.ID_Box.text().strip()
+        user_name = self.Name_Box.text().strip()
+
+        if not user_id or not user_name:
+            QtWidgets.QMessageBox.warning(self.VotingApp, "Input Error", "Please enter both User ID and Name.")
+            return
+
+        if self.Bianca_radioButton.isChecked():
+            candidate_number = "1"
+        elif self.Felicia_radioButton.isChecked():
+            candidate_number = "2"
+        elif self.Edward_radioButton.isChecked():
+            candidate_number = "3"
+        else:
+            QtWidgets.QMessageBox.warning(self.VotingApp, "No candidate Selected","Make sure to select the candidate you wish to vote for")
+            return
+
+        try:
+            # Save the vote into the CSV file
+            with open('votes.csv','a', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow([user_id, user_name, candidate_number])
+
+            QtWidgets.QMessageBox.information(self.VotingApp, "Success", "Your vote has been recorded!")
+
+            # Clear input fields
+            self.ID_Box.setText("")
+            self.Name_Box.setText("")
+            self.Bianca_radioButton.setChecked(False)
+            self.Felicia_radioButton.setChecked(False)
+            self.Edward_radioButton.setChecked(False)
+
+        except Exception as e:
+            QtWidgets.QMessageBox.warning(self.VotingApp, "Oops!", "Something went wrong: " + str(e))
+
+    def exit_button_clicked(self):
+        # Check if the user ID and username are specific
+        user_id = self.ID_Box.text().strip()
+        user_name = self.Name_Box.text().strip()
+
+        if user_id == '12345' and user_name.lower() == 'end':
+            votes = {'1': 0, '2': 0, '3': 0}
+            with open('votes.csv', mode='r') as file:
+                reader = csv.reader(file)
+                for row in reader:
+                        candidate_number = row[2]
+                        if candidate_number in votes:
+                            votes[candidate_number] += 1
+
+                result_message = f"Bianca: {votes['1']} votes\n"
+                result_message += f"Felicia: {votes['2']} votes\n"
+                result_message += f"Edward: {votes['3']} votes\n"
+
+                QtWidgets.QMessageBox.information(self.VotingApp, "Vote Summary", result_message)
