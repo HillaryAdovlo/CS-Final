@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>VotingApp</class>
+ <widget class="QWidget" name="VotingApp">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>300</width>
+    <height>307</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>300</width>
+    <height>300</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>300</width>
+    <height>350</height>
+   </size>
+  </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
+  </property>
+  <property name="windowTitle">
+   <string>VotingApp</string>
+  </property>
+  <widget class="QPushButton" name="Vote_Button">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>220</y>
+     <width>181</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>VOTE</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Exit_button">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>260</y>
+     <width>191</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>EXIT</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="ID_Box">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>20</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="Name_Box">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>50</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="ID_Label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>USER ID:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Name_Lable">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>60</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>NAME:</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="Bianca_radioButton">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>100</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>24</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Bianca</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="Felicia_Button">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>140</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>24</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Felicia</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="Edward_radioButton">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>180</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>24</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Edward</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
